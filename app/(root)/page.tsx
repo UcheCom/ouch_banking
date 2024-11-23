@@ -1,6 +1,8 @@
 import HeaderBox from '@/components/HeaderBox'
 import RightSidebar from '@/components/RightSidebar';
 import TotalBalanceBox from '@/components/TotalBalanceBox';
+import { getLoggedInUser } from '@/lib/actions/user.actions';
+import { get } from 'http';
 
 /**
  * The main landing page of the app, which displays a greeting and basic
@@ -8,8 +10,8 @@ import TotalBalanceBox from '@/components/TotalBalanceBox';
  * 
  * @returns The main landing page of the app.
  */
-const Home = () => {
-    const loggedIn={ firstName: 'Uchenna', lastName: 'Oko', email: 'uchenna.emma193@gmail.com' };
+const Home = async () => {
+    const loggedIn = await getLoggedInUser();
     
     return (
         <section className="home">
@@ -18,7 +20,7 @@ const Home = () => {
                     <HeaderBox 
                         type="greeting"
                         title="Welcome"
-                        user={loggedIn?.firstName || 'Guest'}
+                        user={loggedIn?.name || 'Guest'}
                         subtext="A modern banking app for the century"
                     />
 
